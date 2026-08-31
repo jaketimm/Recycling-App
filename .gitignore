@@ -1,0 +1,18 @@
+node_modules
+
+# Editor directories and files
+.vscode/*
+build/
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+.env
+.env.test
+
+test_accounts.md
+
+# TODO: Remove this when backend is reworked
+server/ 
+
+
