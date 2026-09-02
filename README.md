@@ -48,11 +48,11 @@ RLS tests must run against a **local** Supabase instance (Docker required) — t
 ```bash
 npx supabase start
 npx supabase db reset  # use if the DB/migrations have changed
-npm run test:db -- src/tests/db/profiles.test.ts  # run a single test file
+npm run test:db -- src/tests/db/userProfiles.test.ts  # run a single test file
 npm run test:db   # Run all tests
 ```
 
-`.env.test` needs `VITE_SUPABASE_URL` set to `http://127.0.0.1:54221` along with the local `VITE_SUPABASE_ANON_KEY` and `VITE_SUPABASE_SERVICE_ROLE_KEY` (printed by `npx supabase status`).
+`.env.test` needs `VITE_SUPABASE_URL` set to `http://127.0.0.1:54321` along with the local `VITE_SUPABASE_ANON_KEY` and `VITE_SUPABASE_SERVICE_ROLE_KEY` (printed by `npx supabase status`).
 
 ## Stop the local Supabase instance
 

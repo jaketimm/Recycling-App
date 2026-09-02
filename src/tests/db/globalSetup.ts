@@ -89,7 +89,7 @@ export async function setup(): Promise<void> {
     if (key === 'admin') adminAuthId = id;
   }
 
-  // bird_app_handle_new_user trigger created a user_profiles row with role='user';
+  // recycling_app_handle_new_user trigger created a user_profiles row with role='user';
   // promote the admin user via service role (bypasses column grants + RLS)
   const { error } = await client
     .from('recycling_app_user_profiles')
