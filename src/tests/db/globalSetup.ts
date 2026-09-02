@@ -92,7 +92,7 @@ export async function setup(): Promise<void> {
   // bird_app_handle_new_user trigger created a user_profiles row with role='user';
   // promote the admin user via service role (bypasses column grants + RLS)
   const { error } = await client
-    .from('user_profiles')
+    .from('recycling_app_user_profiles')
     .update({ role: 'admin' })
     .eq('auth_user_id', adminAuthId!);
   if (error) throw new Error(`Admin promotion failed: ${error.message}`);

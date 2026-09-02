@@ -36,7 +36,7 @@ export async function authenticatedContext(
 
   const authUserId = data.user!.id;
   const { data: profile, error: profileError } = await client
-    .from('user_profiles')
+    .from('recycling_app_user_profiles')
     .select('id')
     .eq('auth_user_id', authUserId)
     .single();
