@@ -26,7 +26,7 @@ export function SignUpPage() {
   return (
     <Container size={420} py={60}>
       <Stack gap="xs" mb="lg">
-        <Title order={2} ta="center">Create an account</Title>
+        <Title order={2} ta="center" c="#737d51">Create an account</Title>
         <Text c="dimmed" size="sm" ta="center">
           Already have an account? <Anchor component={Link} to="/login">Log in</Anchor>
         </Text>

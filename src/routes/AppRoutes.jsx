@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { AdminRoute } from './AdminRoute';
 import { LoginPage } from '../features/auth/pages/LoginPage';
 import { SignUpPage } from '../features/auth/pages/SignUpPage';
+import { LandingPage } from '../features/landing/pages/LandingPage';
 import { IdentifyPage } from '../features/identify/pages/IdentifyPage';
 
 export function AppRoutes() {
@@ -13,9 +14,10 @@ export function AppRoutes() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route element={<AppLayout />}>
-        <Route path="/" element={<Navigate to="/identify" replace />} />
+        <Route path="/" element={<Navigate to="/landing" replace />} />
 
         {/* Public — available to anon and authenticated users alike */}
+        <Route path="/landing" element={<LandingPage />} />
         <Route path="/identify" element={<IdentifyPage />} />
 
         {/* Admin */}

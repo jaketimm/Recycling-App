@@ -24,7 +24,7 @@ export function LoginPage() {
   return (
     <Container size={420} py={60}>
       <Stack gap="xs" mb="lg">
-        <Title order={2} ta="center">Recycling App</Title>
+        <Title order={2} ta="center" c="#737d51">Recycling ID</Title>
         <Text c="dimmed" size="sm" ta="center">
           <Anchor component={Link} to="/signup">Create an account</Anchor> to track and manage your photo history, or log in to continue.
         </Text>

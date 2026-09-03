@@ -11,13 +11,17 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { IconLogout, IconLayoutDashboard, IconCamera } from '@tabler/icons-react';
+import { IconLogout, IconLayoutDashboard, IconCamera, IconHome } from '@tabler/icons-react';
 import { useAuth } from '../../../features/auth/hooks/useAuth';
 import { useProfile } from '../../../features/profile/hooks/useProfile';
 
 const NAV_SECTIONS = [
   {
-    label: 'Recycling ID',
+    adminOnly: false,
+    links: [{ label: 'Home', to: '/landing', icon: IconHome }],
+  },
+  {
+    label: 'Images',
     adminOnly: false,
     links: [{ label: 'Identify', to: '/identify', icon: IconCamera }],
   },
@@ -57,7 +61,7 @@ export function AppLayout() {
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md" justify="space-between">
+        <Group h="100%" px="md" justify="space-between" style={{ background: '#4b5232' }}>
           <Group gap="sm">
             <Burger
               opened={opened}
@@ -69,7 +73,7 @@ export function AppLayout() {
               order={4}
               component={Link}
               to="/"
-              style={{ textDecoration: 'none', color: 'inherit' }}
+              style={{ textDecoration: 'none', color: '#ebece6' }}
             >
               Recycling ID
             </Title>
@@ -77,12 +81,12 @@ export function AppLayout() {
           <Group gap="md">
             {user ? (
               <>
-                <Text size="sm" c="dimmed" visibleFrom="sm">
+                <Text size="sm" c="#ebece6" visibleFrom="sm">
                   {user.email}
                 </Text>
                 <Button
                   onClick={handleSignOut}
-                  variant="subtle"
+                  variant="light"
                   size="xs"
                   leftSection={<IconLogout size={16} />}
                 >
@@ -91,10 +95,10 @@ export function AppLayout() {
               </>
             ) : (
               <>
-                <Button component={Link} to="/login" variant="subtle" size="xs">
+                <Button component={Link} to="/login" variant="light" size="xs">
                   Log In
                 </Button>
-                <Button component={Link} to="/signup" size="xs">
+                <Button component={Link} to="/signup" variant="light" size="xs">
                   Sign Up
                 </Button>
               </>
@@ -125,6 +129,7 @@ export function AppLayout() {
                     to={to}
                     label={label}
                     active={isActive(to)}
+                    variant={isActive(to) ? 'light' : 'subtle'}
                     onClick={close}
                     leftSection={<Icon size={18} stroke={1.5} />}
                     style={{
