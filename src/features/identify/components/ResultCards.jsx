@@ -1,5 +1,6 @@
-import { Alert, Anchor, Badge, Card, Divider, Group,
-  Paper, Progress, Stack, Text, ThemeIcon, 
+import {
+  Alert, Anchor, Badge, Card, Divider, Group,
+  Paper, Progress, Stack, Text, ThemeIcon,
 } from '@mantine/core';
 import {
   IconCircleCheck, IconCircleX, IconExternalLink, IconRecycle,
@@ -24,7 +25,7 @@ export function PlaceholderResultCard({ loading }) {
 
 
 // Displays the result of the image analysis, including whether the item is recyclable, confidence level, and any additional instructions or information.
-export function ResultCard({ result }) {
+export function ResultCard({ result, linkDisabled = false }) {
   const {
     contains_recyclable_item, material_type, item_description, confidence,
     unidentified_reason, category, display_name, is_recyclable, instructions,
@@ -107,13 +108,21 @@ export function ResultCard({ result }) {
 
         {/* Include an earth911 page link for select materials */}
         {source_url && (
-          <Anchor href={source_url} target="_blank" rel="noopener noreferrer" size="sm">
+          linkDisabled ? (
             <Group gap={4}>
-              Learn more
+              <Text size="sm">
+                Learn more
+              </Text>
               <IconExternalLink size={14} />
             </Group>
-          </Anchor>
-        )}
+          ) : (
+            <Anchor href={source_url} target="_blank" rel="noopener noreferrer" size="sm">
+              <Group gap={4}>
+                Learn more
+                <IconExternalLink size={14} />
+              </Group>
+            </Anchor>
+          ))}
       </Stack>
     </Card>
   );

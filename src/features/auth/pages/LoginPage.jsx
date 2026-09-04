@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Title, Paper, Text, Anchor, Stack, Alert } from '@mantine/core';
+import { Box, Container, Title, Paper, Text, Anchor, Stack, Alert } from '@mantine/core';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthForm } from '../components/AuthForm';
 import { useAuth } from '../hooks/useAuth';
@@ -22,27 +22,32 @@ export function LoginPage() {
   };
 
   return (
-    <Container size={420} py={60}>
-      <Stack gap="xs" mb="lg">
-        <Title order={2} ta="center" c="#737d51">Recycling ID</Title>
-        <Text c="dimmed" size="sm" ta="center">
-          <Anchor component={Link} to="/signup">Create an account</Anchor> to track and manage your photo history, or log in to continue.
-        </Text>
-      </Stack>
-      <Paper withBorder shadow="md" p={30} radius="md">
-        {linkSent ? (
-          <Alert color="green" title="Check your email">
-            We've sent you a sign-in link. Open it on this device to continue.
-          </Alert>
-        ) : (
-          <AuthForm
-            onMagicLink={handleMagicLink}
-            onPassword={handlePasswordLogin}
-            magicLinkLabel="Email me a sign-in link"
-            passwordLabel="Log in"
-          />
-        )}
-      </Paper>
-    </Container>
+    <Box style={{
+      height: '100vh',
+      padding: '25px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
+    }}>
+      <Container size={420} py={60}>
+        <Stack gap="xs" mb="lg">
+          <Title order={2} ta="center">Recycling ID</Title>
+          <Text c="dimmed" size="sm" ta="center">
+            <Anchor component={Link} to="/signup">Create an account</Anchor> to track and manage your photo history, or log in to continue.
+          </Text>
+        </Stack>
+        <Paper withBorder shadow="md" p={30} radius="md">
+          {linkSent ? (
+            <Alert color="green" title="Check your email">
+              We've sent you a sign-in link. Open it on this device to continue.
+            </Alert>
+          ) : (
+            <AuthForm
+              onMagicLink={handleMagicLink}
+              onPassword={handlePasswordLogin}
+              magicLinkLabel="Email me a sign-in link"
+              passwordLabel="Log in"
+            />
+          )}
+        </Paper>
+      </Container>
+    </Box>
   );
 }

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {
-  Alert,Button, FileInput, Group,
-  Image, Paper, Stack, Text,Title,
+  Alert, Box, Button, FileInput, Group,
+  Image, Paper, Stack, Text, Title,
 } from '@mantine/core';
 import {
-  IconAlertTriangle, IconPhoto, 
+  IconAlertTriangle, IconPhoto,
 } from '@tabler/icons-react';
 import { ResultCard, PlaceholderResultCard } from '../components/ResultCards';
 import { resizeImageToBase64 } from '../utils/resizeImageToBase64';
@@ -57,56 +57,63 @@ export function IdentifyPage() {
   }
 
   return (
-    <Stack gap="lg" maw={960} mx="auto" align="center">
-      <Stack gap={4} align="center">
-        <Title order={2} c="#737d51">Identify your item</Title>
-        <Text c="dimmed">Upload a photo to identify whether your item is recyclable.</Text>
+    <Box style={{
+      minHeight: 'calc(100vh - 56px)',
+      display: 'flex',
+      padding: '25px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
+    }}>
+
+      <Stack gap="lg" maw={960} mx="auto" align="center" >
+        <Stack gap={4} align="center">
+          <Title order={2}>Identify your item</Title>
+          <Text c="dimmed">Upload a photo to identify whether your item is recyclable.</Text>
+        </Stack>
+
+        <Group align="flex-start" justify="center" wrap="wrap" gap="lg">
+          <Paper withBorder radius="md" p="md" w={375} h={400}>
+            <Stack gap="md" h="100%">
+              <FileInput
+                label="Item photo"
+                placeholder="Choose an image"
+                accept="image/*"
+                value={file}
+                onChange={handleFileChange}
+                leftSection={<IconPhoto size={16} />}
+                clearable
+              />
+
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 0 }}>
+                {previewUrl ? (
+                  <Image src={previewUrl} alt="Preview" radius="sm" mah="100%" fit="contain" />
+                ) : (
+                  <Text c="dimmed" size="sm">
+                    No image selected
+                  </Text>
+                )}
+              </div>
+
+              <Group justify="center">
+                <Button onClick={handleSubmit} disabled={!file || loading} loading={loading}>
+                  Identify
+                </Button>
+              </Group>
+            </Stack>
+          </Paper>
+
+          <div style={{ width: 375, minHeight: 400, display: 'flex', flexDirection: 'column' }}>
+            {error && (
+              <Alert color="red" title="Error" icon={<IconAlertTriangle size={18} />} style={{ flex: 1 }}>
+                {error}
+              </Alert>
+            )}
+
+            {result && <ResultCard result={result} linkDisabled={false} />}
+
+            {!error && !result && <PlaceholderResultCard loading={loading} />}
+          </div>
+        </Group>
       </Stack>
-
-      <Group align="flex-start" justify="center" wrap="wrap" gap="lg">
-        <Paper withBorder radius="md" p="md" w={375} h={400}>
-          <Stack gap="md" h="100%">
-            <FileInput
-              label="Item photo"
-              placeholder="Choose an image"
-              accept="image/*"
-              value={file}
-              onChange={handleFileChange}
-              leftSection={<IconPhoto size={16} />}
-              clearable
-            />
-
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 0 }}>
-              {previewUrl ? (
-                <Image src={previewUrl} alt="Preview" radius="sm" mah="100%" fit="contain" />
-              ) : (
-                <Text c="dimmed" size="sm">
-                  No image selected
-                </Text>
-              )}
-            </div>
-
-            <Group justify="center">
-              <Button onClick={handleSubmit} disabled={!file || loading} loading={loading}>
-                Identify
-              </Button>
-            </Group>
-          </Stack>
-        </Paper>
-
-        <div style={{ width: 375, minHeight: 400, display: 'flex', flexDirection: 'column' }}>
-          {error && (
-            <Alert color="red" title="Error" icon={<IconAlertTriangle size={18} />} style={{ flex: 1 }}>
-              {error}
-            </Alert>
-          )}
-
-          {result && <ResultCard result={result} />}
-
-          {!error && !result && <PlaceholderResultCard loading={loading} />}
-        </div>
-      </Group>
-    </Stack>
+    </Box>
   );
 }
 

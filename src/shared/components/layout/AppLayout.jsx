@@ -33,11 +33,13 @@ const NAV_SECTIONS = [
 ];
 
 export function AppLayout() {
-  const [opened, { toggle, close }] = useDisclosure();
   const { signOut, user } = useAuth();
   const { isAdmin } = useProfile();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
   const sections = NAV_SECTIONS.filter((s) => !s.adminOnly || isAdmin);
 
@@ -56,19 +58,15 @@ export function AppLayout() {
       navbar={{
         width: 260,
         breakpoint: 'sm',
-        collapsed: { mobile: !opened },
+        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
       padding="md"
     >
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between" style={{ background: '#4b5232' }}>
           <Group gap="sm">
-            <Burger
-              opened={opened}
-              onClick={toggle}
-              hiddenFrom="sm"
-              size="sm"
-            />
+            <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" color="#ebece6" />
+            <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" color="#ebece6" />
             <Title
               order={4}
               component={Link}
@@ -111,7 +109,7 @@ export function AppLayout() {
         <AppShell.Section grow component={ScrollArea}>
           <Stack gap="lg">
             {sections.map((section) => (
-              <div key={section.label}>
+              <div key={section.label ?? section.links[0].to}>
                 <Text
                   size="xs"
                   fw={700}
