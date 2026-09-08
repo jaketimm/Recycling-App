@@ -5,6 +5,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import { AdminRoute } from './AdminRoute';
 import { LoginPage } from '../features/auth/pages/LoginPage';
 import { SignUpPage } from '../features/auth/pages/SignUpPage';
+import { ProfilePage } from '../features/profile/pages/ProfilePage';
 import { LandingPage } from '../features/landing/pages/LandingPage';
 import { IdentifyPage } from '../features/identify/pages/IdentifyPage';
 
@@ -20,11 +21,15 @@ export function AppRoutes() {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/identify" element={<IdentifyPage />} />
 
-        {/* Admin */}
         <Route element={<ProtectedRoute />}>
+
+          <Route path="/profile" element={<ProfilePage />} />
+
+          {/* Admin */}
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<PlaceholderPage title="Dashboard" description="User and DB management" />} />
           </Route>
+          
         </Route>
 
         <Route path="*" element={<PlaceholderPage title="Not Found" description="No such page." />} />

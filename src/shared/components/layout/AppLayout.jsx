@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { IconLogout, IconLayoutDashboard, IconCamera, IconHome } from '@tabler/icons-react';
+import { IconLogout, IconLayoutDashboard, IconCamera, IconHome, IconUserCircle } from '@tabler/icons-react';
 import { useAuth } from '../../../features/auth/hooks/useAuth';
 import { useProfile } from '../../../features/profile/hooks/useProfile';
 
@@ -24,6 +24,12 @@ const NAV_SECTIONS = [
     label: 'Images',
     adminOnly: false,
     links: [{ label: 'Identify', to: '/identify', icon: IconCamera }],
+  },
+  {
+    label: 'Account',
+    adminOnly: false,
+    authOnly: true,
+    links: [{ label: 'Profile', to: '/profile', icon: IconUserCircle }],
   },
   {
     label: 'Manage',
@@ -41,7 +47,9 @@ export function AppLayout() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
 
-  const sections = NAV_SECTIONS.filter((s) => !s.adminOnly || isAdmin);
+  const sections = NAV_SECTIONS.filter(
+    (s) => (!s.adminOnly || isAdmin) && (!s.authOnly || user)
+  );
 
 
   const isActive = (to) =>
@@ -128,7 +136,7 @@ export function AppLayout() {
                     label={label}
                     active={isActive(to)}
                     variant={isActive(to) ? 'light' : 'subtle'}
-                    onClick={close}
+                    onClick={toggleMobile}
                     leftSection={<Icon size={18} stroke={1.5} />}
                     style={{
                       borderRadius: 'var(--mantine-radius-sm)',

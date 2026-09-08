@@ -60,7 +60,7 @@ export function IdentifyPage() {
     <Box style={{
       minHeight: 'calc(100vh - 56px)',
       display: 'flex',
-      padding: '25px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
+      padding: '25px', paddingTop: '50px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
     }}>
 
       <Stack gap="lg" maw={960} mx="auto" align="center" >
