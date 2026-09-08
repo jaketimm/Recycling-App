@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import {
   Alert, Box, Button, FileInput, Group,
   Image, Paper, Stack, Text, Title,
@@ -11,6 +12,7 @@ import { resizeImageToBase64 } from '../utils/resizeImageToBase64';
 import { supabase } from '../../../lib/supabaseClient';
 
 export function IdentifyPage() {
+  const queryClient = useQueryClient();
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -49,6 +51,9 @@ export function IdentifyPage() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Identification failed');
       setResult(data);
+      if (data.saved && session?.user) {
+        queryClient.invalidateQueries({ queryKey: ['submissions', session.user.id] });
+      }
     } catch (err) {
       setError(err.message);
     } finally {

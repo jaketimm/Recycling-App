@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { IconLogout, IconLayoutDashboard, IconCamera, IconHome, IconUserCircle } from '@tabler/icons-react';
+import { IconLogout, IconLayoutDashboard, IconCamera, IconHome, IconUserCircle, IconPhoto } from '@tabler/icons-react';
 import { useAuth } from '../../../features/auth/hooks/useAuth';
 import { useProfile } from '../../../features/profile/hooks/useProfile';
 
@@ -29,7 +29,10 @@ const NAV_SECTIONS = [
     label: 'Account',
     adminOnly: false,
     authOnly: true,
-    links: [{ label: 'Profile', to: '/profile', icon: IconUserCircle }],
+    links: [
+      { label: 'My submissions', to: '/submissions', icon: IconPhoto },
+      { label: 'Profile', to: '/profile', icon: IconUserCircle },
+    ],
   },
   {
     label: 'Manage',

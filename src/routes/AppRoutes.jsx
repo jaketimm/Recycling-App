@@ -8,6 +8,7 @@ import { SignUpPage } from '../features/auth/pages/SignUpPage';
 import { ProfilePage } from '../features/profile/pages/ProfilePage';
 import { LandingPage } from '../features/landing/pages/LandingPage';
 import { IdentifyPage } from '../features/identify/pages/IdentifyPage';
+import { SubmissionsPage } from '../features/submissions/pages/SubmissionsPage';
 
 export function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ export function AppRoutes() {
         <Route element={<ProtectedRoute />}>
 
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/submissions" element={<SubmissionsPage />} />
 
           {/* Admin */}
           <Route element={<AdminRoute />}>
