@@ -5,21 +5,16 @@ import { AuthForm } from '../components/AuthForm';
 import { useAuth } from '../hooks/useAuth';
 
 export function SignUpPage() {
-  const { signInWithMagicLink, signUpWithPassword } = useAuth();
+  const { signUpWithPassword } = useAuth();
   const navigate = useNavigate();
-  const [linkSent, setLinkSent] = useState(false);
-
-  const handleMagicLink = async ({ email, fullName }) => {
-    await signInWithMagicLink(email, fullName);
-    setLinkSent(true);
-  };
+  const [confirmEmailSent, setConfirmEmailSent] = useState(false);
 
   const handlePasswordSignUp = async ({ email, password, fullName }) => {
     const { session } = await signUpWithPassword(email, password, fullName);
     if (session) {
       navigate('/', { replace: true });
     } else {
-      setLinkSent(true);
+      setConfirmEmailSent(true);
     }
   };
 
@@ -36,18 +31,12 @@ export function SignUpPage() {
           </Text>
         </Stack>
         <Paper withBorder shadow="md" p={30} radius="md">
-          {linkSent ? (
+          {confirmEmailSent ? (
             <Alert color="green" title="Check your email">
-              We've sent you a link to finish creating your account.
+              We've sent you a link to confirm your account.
             </Alert>
           ) : (
-            <AuthForm
-              onMagicLink={handleMagicLink}
-              onPassword={handlePasswordSignUp}
-              magicLinkLabel="Email me a sign-in link"
-              passwordLabel="Sign up"
-              withName
-            />
+            <AuthForm onPassword={handlePasswordSignUp} passwordLabel="Sign up" withName />
           )}
         </Paper>
       </Container>

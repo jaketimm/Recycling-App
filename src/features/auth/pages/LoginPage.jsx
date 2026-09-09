@@ -1,20 +1,13 @@
-import { useState } from 'react';
-import { Box, Container, Title, Paper, Text, Anchor, Stack, Alert } from '@mantine/core';
+import { Box, Container, Title, Paper, Text, Anchor, Stack } from '@mantine/core';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthForm } from '../components/AuthForm';
 import { useAuth } from '../hooks/useAuth';
 
 export function LoginPage() {
-  const { signInWithMagicLink, signInWithPassword } = useAuth();
+  const { signInWithPassword } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [linkSent, setLinkSent] = useState(false);
   const from = location.state?.from?.pathname ?? '/';
-
-  const handleMagicLink = async ({ email }) => {
-    await signInWithMagicLink(email);
-    setLinkSent(true);
-  };
 
   const handlePasswordLogin = async ({ email, password }) => {
     await signInWithPassword(email, password);
@@ -34,18 +27,7 @@ export function LoginPage() {
           </Text>
         </Stack>
         <Paper withBorder shadow="md" p={30} radius="md">
-          {linkSent ? (
-            <Alert color="green" title="Check your email">
-              We've sent you a sign-in link. Open it on this device to continue.
-            </Alert>
-          ) : (
-            <AuthForm
-              onMagicLink={handleMagicLink}
-              onPassword={handlePasswordLogin}
-              magicLinkLabel="Email me a sign-in link"
-              passwordLabel="Log in"
-            />
-          )}
+          <AuthForm onPassword={handlePasswordLogin} passwordLabel="Log in" />
         </Paper>
       </Container>
     </Box>

@@ -38,7 +38,6 @@ export function AuthProvider({ children }) {
     session,
     user: session?.user ?? null,
     loading,
-    signInWithMagicLink: authService.signInWithMagicLink,
     signInWithPassword: authService.signInWithPassword,
     signUpWithPassword: authService.signUpWithPassword,
     signOut,
