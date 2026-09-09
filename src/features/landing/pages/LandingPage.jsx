@@ -30,7 +30,7 @@ export function LandingPage() {
               </Title>
               <Text c="dimmed" size="lg" maw={480}>
                 Snap a photo of any item and get a fast, material-specific
-                answer. No guessing, no wish-cycling.
+                answer. 
               </Text>
               <Group gap="md" mt="sm">
                 <Button component={Link} to="/identify" size="lg" radius="xl" variant="filled" leftSection={<IconCamera size={20} />}>

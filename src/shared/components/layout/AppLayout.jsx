@@ -84,7 +84,7 @@ export function AppLayout() {
               to="/"
               style={{ textDecoration: 'none', color: '#ebece6' }}
             >
-              Recycling ID
+              Can I Recycle It?
             </Title>
           </Group>
           <Group gap="md">
