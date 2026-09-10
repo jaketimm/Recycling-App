@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import {
   Alert, Box, Button, FileInput, Group,
-  Image, Paper, Stack, Text, Title,
+  Image, Paper, Stack, Text, Title, Center
 } from '@mantine/core';
 import {
-  IconAlertTriangle, IconPhoto,
+  IconAlertTriangle, IconCamera, IconPhoto,
 } from '@tabler/icons-react';
 import { ResultCard, PlaceholderResultCard } from '../components/ResultCards';
 import { resizeImageToBase64 } from '../utils/resizeImageToBase64';
@@ -13,6 +13,7 @@ import { supabase } from '../../../lib/supabaseClient';
 
 export function IdentifyPage() {
   const queryClient = useQueryClient();
+  const cameraInputRef = useRef(null);
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -24,6 +25,12 @@ export function IdentifyPage() {
     setResult(null);
     setError(null);
     setPreviewUrl(selectedFile ? URL.createObjectURL(selectedFile) : null);
+  }
+
+  function handleCameraCapture(event) {
+    const selectedFile = event.target.files?.[0] || null;
+    handleFileChange(selectedFile);
+    event.target.value = '';
   }
 
   async function handleSubmit() {
@@ -86,6 +93,26 @@ export function IdentifyPage() {
                 leftSection={<IconPhoto size={16} />}
                 clearable
               />
+
+              <input
+                ref={cameraInputRef}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={handleCameraCapture}
+                style={{ display: 'none' }}
+              />
+              
+              <Center>
+                <Button
+                  variant="light"
+                  style={{ maxWidth: '50%' }}
+                  leftSection={<IconCamera size={16} />}
+                  onClick={() => cameraInputRef.current?.click()}
+                >
+                  Take Photo
+                </Button>
+              </Center>
 
               <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 0 }}>
                 {previewUrl ? (
