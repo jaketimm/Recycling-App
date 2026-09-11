@@ -12,7 +12,7 @@ export const submissionService = {
     if (!profile) return [];
 
     const { data, error } = await supabase.from('recycling_app_submitted_items')
-      .select('id, user_id, image_url, material_type, item_description, created_at, material:recycling_app_material_info(display_name, is_generally_recyclable)')
+      .select('id, user_id, image_url, material_type, item_description, created_at, material:recycling_app_material_info(display_name, is_generally_recyclable, instructions, source_url)')
       .eq('user_id', profile.id).order('created_at', { ascending: false });
     if (error) throw error;
     return data;

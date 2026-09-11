@@ -1,6 +1,31 @@
 # Recycling Web App
 
-## Install Dependencies
+Snap a photo of an item and instantly find out if and how it can be recycled. Powered by Gemini AI image recognition and a curated material database, with user accounts and per-user submission histories.
+
+[Live Demo](https://canirecycleit.netlify.app/landing)
+
+## App Preview
+
+### Image Results
+
+![Glass Pane Recycling result](images/glass_pane_result.png)
+
+![Old Pan Recycling result](images/cookware_result.png)
+
+### Account Submission History
+
+![Submission history page](images/account_submissions.png)
+
+## Tech Stack
+
+- **Frontend:** React, Vite, Mantine
+- **Backend:** Flask (image identification API)
+- **Database/Auth:** Supabase (Postgres, RLS, Auth, Storage)
+- **Hosting:** Netlify and PythonAnywhere
+
+## Development
+
+### Install Dependencies
 
 ```bash
 npm install
@@ -15,7 +40,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Running the Application
+### Running the Application
 
 1. Start the Flask backend
 
@@ -31,17 +56,13 @@ python app.py
 npm run dev
 ```
 
-## Supabase commands
+### Supabase commands
 
 ```bash
 npm run supabase:push
 ```
 
-```bash
-npm run supabase:diff
-```
-
-## Run RLS Unit tests
+### Run RLS Unit tests
 
 RLS tests must run against a **local** Supabase instance (Docker required) — they refuse to run against the remote/production database. Test users (`userA`, `userB`, `admin`) are created and torn down automatically in `globalSetup`, so no manual setup is needed beyond starting the stack.
 
@@ -54,7 +75,7 @@ npm run test:db   # Run all tests
 
 `.env.test` needs `VITE_SUPABASE_URL` set to `http://127.0.0.1:54321` along with the local `VITE_SUPABASE_ANON_KEY` and `VITE_SUPABASE_SERVICE_ROLE_KEY` (printed by `npx supabase status`).
 
-## Stop the local Supabase instance
+### Stop the local Supabase instance
 
 ```bash
 npx supabase stop

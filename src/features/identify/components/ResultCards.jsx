@@ -64,7 +64,7 @@ export function ResultCard({ result, linkDisabled = false }) {
               )}
             </div>
           </Group>
-          {saved && <Badge color="#96a16f" variant="light">Saved</Badge>}
+          {saved && <Badge color="#4b5232">Saved</Badge>}
         </Group>
 
         <Badge color={recyclable ? 'GreenColors' : '#7e3a34'} variant="filled" w="fit-content">
