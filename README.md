@@ -1,8 +1,14 @@
 # Recycling Web App
 
-Snap a photo of an item and instantly find out if and how it can be recycled. Powered by Gemini AI image recognition and a curated material database, with user accounts and per-user submission histories.
+Snap a photo of an item and find out if and how it can be recycled. Powered by Gemini AI image recognition and a curated material database.
 
-[Live Demo](https://canirecycleit.netlify.app/landing)
+[Try the live app](https://canirecycleit.netlify.app/landing)
+
+## Key Features
+
+- **Photo-based material identification:** Gemini identifies what's in your photo, and returns its material along with a confidence rating and description.
+- **Material-specific recycling guidance:** Identification results are matched with a curated database of general recycling facts.
+- **Personal submission history:** Create an account to save and revisit previous submissions.
 
 ## App Preview
 
@@ -23,60 +29,21 @@ Snap a photo of an item and instantly find out if and how it can be recycled. Po
 - **Database/Auth:** Supabase (Postgres, RLS, Auth, Storage)
 - **Hosting:** Netlify and PythonAnywhere
 
+## How It Works
+
+The React frontend sends an uploaded image to a Flask API. The image is compressed and sent to Gemini for identification. The identified material is then matched with a general recycling facts table to build the result shown to the user.
+
+Supabase provides authentication, Postgres data storage, and image storage. Row Level Security (RLS) controls access to user data.
+
+Recycling guidance is general; local acceptance rules may vary.
+
+## Technical Highlights
+
+- **Structured AI responses:** A response schema constrains Gemini’s output to a list of expected fields and supported material types. Pydantic validates the returned data before the application processes it.
+- **Database migrations:** Schema changes are tracked in version-controlled migration files, making database changes reproducible.
+- **Tested access controls:** An automated RLS test suite checks database access policies against a local Supabase instance. Test users are created and cleaned up automatically.
+
 ## Development
 
-### Install Dependencies
-
-```bash
-npm install
-```
-
-Set up Python backend:
-
-```bash
-cd server
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### Running the Application
-
-1. Start the Flask backend
-
-```bash
-cd server
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-python app.py
-```
-
-2. In a new terminal, run the dev server
-
-```bash
-npm run dev
-```
-
-### Supabase commands
-
-```bash
-npm run supabase:push
-```
-
-### Run RLS Unit tests
-
-RLS tests must run against a **local** Supabase instance (Docker required) — they refuse to run against the remote/production database. Test users (`userA`, `userB`, `admin`) are created and torn down automatically in `globalSetup`, so no manual setup is needed beyond starting the stack.
-
-```bash
-npx supabase start
-npx supabase db reset  # use if the DB/migrations have changed
-npm run test:db -- src/tests/db/userProfiles.test.ts  # run a single test file
-npm run test:db   # Run all tests
-```
-
-`.env.test` needs `VITE_SUPABASE_URL` set to `http://127.0.0.1:54321` along with the local `VITE_SUPABASE_ANON_KEY` and `VITE_SUPABASE_SERVICE_ROLE_KEY` (printed by `npx supabase status`).
-
-### Stop the local Supabase instance
-
-```bash
-npx supabase stop
-```
+See the [development guide](docs/DEVELOPMENT.md) for local setup,
+running the app, and database testing.
