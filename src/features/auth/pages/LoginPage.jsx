@@ -22,8 +22,8 @@ export function LoginPage() {
       <Container size={420} py={60}>
         <Stack gap="xs" mb="lg">
           <Title order={2} ta="center">Can I Recycle It?</Title>
-          <Text c="dimmed" size="sm" ta="center">
-            <Anchor component={Link} to="/signup">Create an account</Anchor> to track and manage your photo history, or log in to continue.
+          <Text size="sm" ta="center">
+            <Anchor component={Link} to="/signup" c="GreenColors.9">Create an account</Anchor> to track and manage your photo history, or log in to continue.
           </Text>
         </Stack>
         <Paper withBorder shadow="md" p={30} radius="md">

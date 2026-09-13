@@ -1,4 +1,4 @@
-import { createTheme } from '@mantine/core';
+import { createTheme, Button } from '@mantine/core';
 
 const GreenColors = [
   '#f6f7f2',
@@ -18,4 +18,15 @@ export const theme = createTheme({
     GreenColors,
   },
   primaryColor: 'GreenColors',
+  // Darker shade for filled buttons/components
+  primaryShade: { light: 8, dark: 8 },
+  components: {
+    // add a matching border for more definition
+    Button: Button.extend({
+      styles: (buttonTheme, { variant }) =>
+        variant === 'light'
+          ? { root: { borderColor: buttonTheme.colors.GreenColors[8] } }
+          : {},
+    }),
+  },
 });

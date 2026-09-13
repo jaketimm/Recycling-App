@@ -60,7 +60,7 @@ export function ProfilePage() {
       minHeight: 'calc(100vh - 56px)',
       display: 'flex',
       justifyContent: 'center',
-      padding: '25px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
+      padding: '25px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #dbddd5 0%, #eaecea 55%)'
     }}>
       <Container size="sm" py="xl" style={{ width: '100%', maxWidth: '450px' }}>
         <Title order={2} mb="lg" ta="center">My Profile</Title>

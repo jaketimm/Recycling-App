@@ -26,8 +26,8 @@ export function SignUpPage() {
       <Container size={420} py={60}>
         <Stack gap="xs" mb="lg">
           <Title order={2} ta="center">Create an account</Title>
-          <Text c="dimmed" size="sm" ta="center">
-            Already have an account? <Anchor component={Link} to="/login">Log in</Anchor>
+          <Text size="sm" ta="center">
+            Already have an account? <Anchor component={Link} to="/login" c="GreenColors.9">Log in</Anchor>
           </Text>
         </Stack>
         <Paper withBorder shadow="md" p={30} radius="md">

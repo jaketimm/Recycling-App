@@ -19,7 +19,7 @@ export function LandingPage() {
           display: 'flex',
           alignItems: 'center',
           padding: '35px',
-          background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)',
+          background: 'radial-gradient(circle at 15% 20%, #dbddd5 0%, #eaecea 55%)',
         }}
       >
         <Container size="lg" py={80}>
@@ -28,7 +28,7 @@ export function LandingPage() {
               <Title order={1} c="black" fw={800} style={{ fontSize: '2.75rem', lineHeight: 1.1 }}>
                 Know if it's recyclable before you toss it
               </Title>
-              <Text c="dimmed" size="lg" maw={480}>
+              <Text size="lg" maw={480}>
                 Snap a photo of any item and get a fast, material-specific
                 answer. 
               </Text>

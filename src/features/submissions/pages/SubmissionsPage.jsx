@@ -30,13 +30,13 @@ export function SubmissionsPage() {
   return (
     <Box style={{
       minHeight: 'calc(100vh - 56px)',
-      padding: '25px', paddingTop: '50px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #eef1e6 0%, #fbfcfb 55%)'
+      padding: '25px', paddingTop: '50px', margin: '-16px', background: 'radial-gradient(circle at 15% 20%, #dbddd5 0%, #eaecea 55%)'
     }}>
       <Stack gap="xl" maw={1200} mx="auto">
         <Group justify="center">
           <Stack gap={4}>
             <Title order={2} ta="center">My submissions</Title>
-            <Text c="dimmed">Your saved photos and identification results, newest first.</Text>
+            <Text >Your saved photos and identification results, newest first.</Text>
           </Stack>
         </Group>
 
